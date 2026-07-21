@@ -8,9 +8,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'HELM1/**'
-      - 'k8s/**'
-      - 'README.md'
+      - 'helm/**'
 
 jobs:
 
@@ -83,12 +81,12 @@ jobs:
 
     - name: Update tag in Helm chart
       run: |
-        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' HELM1/goo-chart/values.yaml
+        sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/goo-chart/values.yaml
 
     - name: Commit and push changes
       run: |
         git config --global user.email "bikky.roy@gmail.com"
         git config --global user.name "Bikkythecoder"
-        git add HELM1/goo-chart/values.yaml
+        git add helm/goo-chart/values.yaml
         git commit -m "Update tag in Helm chart"
         git push
